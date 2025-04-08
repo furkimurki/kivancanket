@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kıvanç Group En Yakışıklı Anketi 😎</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .button:disabled {
+      background-color: #cccccc;
+    }
+    .results {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Kıvanç Group En Yakışıklı Anketi 😎</h1>
+  
+  <div>
+    <button class="button" onclick="vote('Ahmet Yılmaz')">Ahmet Yılmaz</button>
+    <button class="button" onclick="vote('Volkan Akar')">Volkan Akar</button>
+    <button class="button" onclick="vote('Gökhan Dere')">Gökhan Dere</button>
+    <button class="button" onclick="vote('Altan Kaptan')">Altan Kaptan</button>
+  </div>
+
+  <div class="results">
+    <h3>Oy Durumu:</h3>
+    <div id="result"></div>
+  </div>
+</div>
+
+<script>
+  let votes = {
+    'Ahmet Yılmaz': 0,
+    'Volkan Akar': 0,
+    'Gökhan Dere': 0,
+    'Altan Kaptan': 0
+  };
+
+  function vote(name) {
+    votes[name]++;
+    displayResults();
+  }
+
+  function displayResults() {
+    const totalVotes = Object.values(votes).reduce((total, count) => total + count, 0);
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = '';
+    
+    for (const name in votes) {
+      const percentage = totalVotes > 0 ? ((votes[name] / totalVotes) * 100).toFixed(2) : 0;
+      resultDiv.innerHTML += `
+        <div class="result-item">
+          <span>${name}</span>
+          <span>${votes[name]} oy (${percentage}%)</span>
+        </div>
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>
